@@ -45,4 +45,14 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
+
+    @Test  // Должен выбирать билет с меньшей стоимостью
+    public void shouldChooseTicketWithLowerPrice() {
+
+        int expected = ticket2.compareTo(ticket4);
+        int actual = -1;
+
+        Assertions.assertEquals(expected, actual);
+
+    }
 }
