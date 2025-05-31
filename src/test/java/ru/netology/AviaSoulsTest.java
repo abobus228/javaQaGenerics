@@ -3,6 +3,7 @@ package ru.netology;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.comparators.TicketTimeComparator;
 
 public class AviaSoulsTest {
 
@@ -10,7 +11,7 @@ public class AviaSoulsTest {
     Ticket ticket2 = new Ticket("Москва", "Калининград", 13_982, 13, 23);
     Ticket ticket3 = new Ticket("Томск", "Новосибирск", 12_652, 14, 22);
     Ticket ticket4 = new Ticket("Москва", "Калининград", 15_122, 15, 21);
-    Ticket ticket5 = new Ticket("Москва", "Калининград", 8_994, 16, 25);
+    Ticket ticket5 = new Ticket("Москва", "Калининград", 8_994, 16, 24);
 
     AviaSouls tickets = new AviaSouls();
 
@@ -28,6 +29,18 @@ public class AviaSoulsTest {
 
         Ticket[] expected = tickets.search("Москва", "Калининград");
         Ticket[] actual = { ticket1, ticket5, ticket2, ticket4 };
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test  // Должен вернуть список сортированный по времени полета
+    public void shouldListSortedByFlightTime() {
+
+        TicketTimeComparator comparator = new TicketTimeComparator();
+
+        Ticket[] expected = tickets.searchAndSortBy("Москва", "Калининград", comparator);
+        Ticket[] actual = { ticket1, ticket4, ticket5, ticket2 };
 
         Assertions.assertArrayEquals(expected, actual);
 
